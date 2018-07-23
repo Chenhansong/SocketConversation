@@ -1,0 +1,6 @@
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\bin\Debug\Server.dll
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\bin\Debug\Server.pdb
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\obj\Debug\Server.csprojAssemblyReference.cache
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\obj\Debug\Server.dll
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\obj\Debug\Server.pdb

@@ -1,0 +1,12 @@
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\bin\Debug\Server.dll
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\bin\Debug\Server.pdb
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\obj\Debug\Conversation.csprojAssemblyReference.cache
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\obj\Debug\Conversation.csproj.CoreCompileInputs.cache
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\obj\Debug\Server.dll
+C:\Users\HanSong Chen\Desktop\WebAListener\Server\obj\Debug\Server.pdb
+C:\Users\HanSong Chen\Desktop\WebOne\Server\bin\Debug\Server.dll
+C:\Users\HanSong Chen\Desktop\WebOne\Server\bin\Debug\Server.pdb
+C:\Users\HanSong Chen\Desktop\WebOne\Server\obj\Debug\Conversation.csprojAssemblyReference.cache
+C:\Users\HanSong Chen\Desktop\WebOne\Server\obj\Debug\Conversation.csproj.CoreCompileInputs.cache
+C:\Users\HanSong Chen\Desktop\WebOne\Server\obj\Debug\Server.dll
+C:\Users\HanSong Chen\Desktop\WebOne\Server\obj\Debug\Server.pdb
