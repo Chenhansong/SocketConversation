@@ -34,3 +34,18 @@ C:\Users\HanSong Chen\Desktop\WebOne\WebAListener\obj\Debug\WebAListener.csproj.
 C:\Users\HanSong Chen\Desktop\WebOne\WebAListener\obj\Debug\WebAListener.csproj.CopyComplete
 C:\Users\HanSong Chen\Desktop\WebOne\WebAListener\obj\Debug\WebAListener.exe
 C:\Users\HanSong Chen\Desktop\WebOne\WebAListener\obj\Debug\WebAListener.pdb
+E:\IT\Exercise\SocketConversationOne\WebAListener\bin\Debug\WebAListener.exe.config
+E:\IT\Exercise\SocketConversationOne\WebAListener\bin\Debug\WebAListener.exe
+E:\IT\Exercise\SocketConversationOne\WebAListener\bin\Debug\WebAListener.pdb
+E:\IT\Exercise\SocketConversationOne\WebAListener\bin\Debug\Server.dll
+E:\IT\Exercise\SocketConversationOne\WebAListener\bin\Debug\Server.pdb
+E:\IT\Exercise\SocketConversationOne\WebAListener\obj\Debug\WebAListener.csprojAssemblyReference.cache
+E:\IT\Exercise\SocketConversationOne\WebAListener\obj\Debug\WebAListener.Form1.resources
+E:\IT\Exercise\SocketConversationOne\WebAListener\obj\Debug\WebAListener.Properties.Resources.resources
+E:\IT\Exercise\SocketConversationOne\WebAListener\obj\Debug\WebAListener.csproj.GenerateResource.cache
+E:\IT\Exercise\SocketConversationOne\WebAListener\obj\Debug\WebAListener.csproj.CoreCompileInputs.cache
+E:\IT\Exercise\SocketConversationOne\WebAListener\obj\Debug\WebAListener.csproj.CopyComplete
+E:\IT\Exercise\SocketConversationOne\WebAListener\obj\Debug\WebAListener.exe
+E:\IT\Exercise\SocketConversationOne\WebAListener\obj\Debug\WebAListener.pdb
+E:\IT\Exercise\SocketConversationOne\WebAListener\bin\Debug\Newtonsoft.Json.dll
+E:\IT\Exercise\SocketConversationOne\WebAListener\bin\Debug\Newtonsoft.Json.xml

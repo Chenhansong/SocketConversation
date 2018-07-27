@@ -10,3 +10,12 @@ C:\Users\HanSong Chen\Desktop\WebOne\Server\obj\Debug\Conversation.csprojAssembl
 C:\Users\HanSong Chen\Desktop\WebOne\Server\obj\Debug\Conversation.csproj.CoreCompileInputs.cache
 C:\Users\HanSong Chen\Desktop\WebOne\Server\obj\Debug\Server.dll
 C:\Users\HanSong Chen\Desktop\WebOne\Server\obj\Debug\Server.pdb
+E:\IT\Exercise\SocketConversationOne\Server\bin\Debug\Server.dll
+E:\IT\Exercise\SocketConversationOne\Server\bin\Debug\Server.pdb
+E:\IT\Exercise\SocketConversationOne\Server\obj\Debug\Conversation.csprojAssemblyReference.cache
+E:\IT\Exercise\SocketConversationOne\Server\obj\Debug\Conversation.csproj.CoreCompileInputs.cache
+E:\IT\Exercise\SocketConversationOne\Server\obj\Debug\Server.dll
+E:\IT\Exercise\SocketConversationOne\Server\obj\Debug\Server.pdb
+E:\IT\Exercise\SocketConversationOne\Server\bin\Debug\Newtonsoft.Json.dll
+E:\IT\Exercise\SocketConversationOne\Server\bin\Debug\Newtonsoft.Json.xml
+E:\IT\Exercise\SocketConversationOne\Server\obj\Debug\Conversation.csproj.CopyComplete

@@ -41,7 +41,6 @@ namespace WebAListener
         private void StartServer()
         {
             Server.Server serverListen = new Server.Server(panel1, this.IP, this.ReceivePort,this.UserId);
-            serverListen.StartListening();
         }
 
         private void Form1_Load(object sender, EventArgs e)

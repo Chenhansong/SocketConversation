@@ -21,6 +21,11 @@ namespace Server
         public string UserId { get; set; }
 
         /// <summary>
+        /// 文件
+        /// </summary>
+        public string MessageFile { get; set; }
+
+        /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }

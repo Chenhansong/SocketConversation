@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -8,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace Server
 {
@@ -32,6 +35,8 @@ namespace Server
 
             Thread getmessagethread = new Thread(ShowOldMessage);
             getmessagethread.Start();
+
+            StartListening();
         }
 
         private void ShowOldMessage()
@@ -70,7 +75,6 @@ namespace Server
         /// <param name="port">端口</param>
         public void StartListening()
         {
-            byte[] bytes = new Byte[1024];//Data buffer for incoming data
             try
             {
                 Listener.BeginAccept(new AsyncCallback(AcceptCallBack), Listener);
@@ -97,7 +101,7 @@ namespace Server
             }
             else
             {
-                newcontrol.Location = CountPoint(newcontrol);
+                newcontrol.Location = CountMessagePointOnPanel(newcontrol);
                 panel.Controls.Add(newcontrol);
             }
 
@@ -109,7 +113,7 @@ namespace Server
         /// </summary>
         /// <param name="editpointcontrol">要修改坐标的控件</param>
         /// <returns></returns>
-        public Point CountPoint(Control editpointcontrol)
+        public Point CountMessagePointOnPanel(Control editpointcontrol)
         {
             int count = panel.Controls.Count;
             Control control = new Control();
@@ -122,6 +126,34 @@ namespace Server
             return point;
         }
 
+        /// <summary>
+        /// 图片转字节数组
+        /// </summary>
+        /// <param name="bitmap"></param>
+        /// <returns></returns>
+        public byte[] ImgToBytes(Bitmap bitmap)
+        {
+            MemoryStream memory = new MemoryStream();
+            bitmap.Save(memory, ImageFormat.Png);
+            int len = (int)memory.Position;
+
+            byte[] ret = new byte[memory.Position];
+            memory.Seek(0, SeekOrigin.Begin);
+            memory.Read(ret, 0, len);
+
+            return ret;
+        }
+
+        /// <summary>
+        /// 字节数组转图片
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public Image BytesToImage(byte[] bytes)
+        {
+            return Image.FromStream(new MemoryStream(bytes));
+        }
+
         public void AcceptCallBack(IAsyncResult ar)
         {
             Socket listener = (Socket)ar.AsyncState;
@@ -130,8 +162,6 @@ namespace Server
             StateObject stateObject = new StateObject();
             stateObject.workSocket = handler;
             handler.BeginReceive(stateObject.buffer,0,StateObject.bufferSize,0,new AsyncCallback(ReadCallBack),stateObject);
-
-            Listener.BeginAccept(new AsyncCallback(AcceptCallBack), Listener);
         }
 
         public void ReadCallBack(IAsyncResult ar)
@@ -142,45 +172,70 @@ namespace Server
             Socket handler = stateObject.workSocket;
             Data data = new Data();
             MessageModel messageModel = new MessageModel();
+            Control control = new Control();
 
             int bytesRead = handler.EndReceive(ar);
             if (bytesRead > 0)
             {
-                stateObject.sb.Append(Encoding.UTF8.GetString(stateObject.buffer, 0, bytesRead));
-
-                content = stateObject.sb.ToString();
-                if (content.IndexOf("<END>") > -1)
+                content = Encoding.UTF8.GetString(stateObject.buffer);
+                try
                 {
-                    Label receivedata = new Label();                 
-
-                    string[] sArray = content.Split(new string[] { "<UserId>","<END>" }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string e in sArray)
+                    messageModel = JsonConvert.DeserializeObject<MessageModel>(content);
+                    if (messageModel.MessageFile != null)
                     {
-                        messageModel.Message = sArray[0];
-                        messageModel.CreateTime = DateTime.Now;
-                        receivedata.Text = sArray[0] + "     :" + DateTime.Now;
-                        messageModel.UserId = sArray[1];
-                    }
-                    receivedata.AutoSize = true;
-                    AddControlToPanel(receivedata);
+                        byte[] filebyte = Convert.FromBase64String(messageModel.MessageFile);
+                        PictureBox pictureBox = NewPicture(filebyte);
+                        Label createtimelabel = new Label();
+                        createtimelabel.Text = "     :" + messageModel.CreateTime;
+                        createtimelabel.AutoSize = true;
+                        createtimelabel.Location = labelOnPictureSideLocation(pictureBox, createtimelabel);
 
+                        AddControlToPanel(pictureBox);
+                        AddControlToPanel(createtimelabel);
+                    }
+                    if (messageModel.Message != null && messageModel.Message != "")
+                    {
+                        Label receivedata = new Label();
+                        receivedata.Text = messageModel.Message + "     :" + messageModel.CreateTime;
+                        receivedata.AutoSize = true;
+                        AddControlToPanel(receivedata);
+                    }
+
+                    Send(handler);//返回信息
                     bool result = data.InsertMessage(messageModel);
                     if (!result)
                     {
-                        Console.WriteLine("Insert Message Error");
+                        MessageBox.Show("Insert Message Error");
                     }
 
-                    Send(handler, receivedata.Text);//返回信息
                 }
-                else
+                catch (Exception e)
                 {
-                    handler.BeginReceive(stateObject.buffer, 0, StateObject.bufferSize, 0, new AsyncCallback(ReadCallBack), stateObject);
+                    MessageBox.Show(e.ToString());
                 }
+
             }
         }
 
-        public void Send(Socket handler,string data)
+        private Point labelOnPictureSideLocation(PictureBox pic,Label label)
         {
+            Point labelpoint = new Point(pic.Width, pic.Location.Y);
+            return labelpoint;
+        }
+
+        private PictureBox NewPicture(byte[] picbyte)
+        {
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.BackgroundImage = BytesToImage(picbyte);
+            pictureBox.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox.Size = new Size { Height = 100, Width = 100 };
+
+            return pictureBox;
+        }
+
+        public void Send(Socket handler)
+        {
+            string data = "success";
             byte[] byteData = Encoding.UTF8.GetBytes(data);
 
             handler.BeginSend(byteData,0,byteData.Length,0,new AsyncCallback(SendCallBack),handler);
@@ -196,7 +251,7 @@ namespace Server
                 handler.Shutdown(SocketShutdown.Both);
                 handler.Close();
 
-                Listener.BeginAccept(new AsyncCallback(AcceptCallBack), Listener);
+                StartListening();
             }
             catch (Exception e)
             {
@@ -212,7 +267,7 @@ namespace Server
     {
         public Socket workSocket { get; set; }
 
-        public const int bufferSize = 1024;
+        public const int bufferSize = 100000000;
 
         public byte[] buffer = new byte[bufferSize];
 
