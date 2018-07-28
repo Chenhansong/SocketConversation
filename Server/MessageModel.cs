@@ -23,7 +23,7 @@ namespace Server
         /// <summary>
         /// 文件
         /// </summary>
-        public string MessageFile { get; set; }
+        public byte[] MessageFile { get; set; }
 
         /// <summary>
         /// 创建时间

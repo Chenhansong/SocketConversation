@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Server
 {
@@ -183,7 +184,7 @@ namespace Server
                     messageModel = JsonConvert.DeserializeObject<MessageModel>(content);
                     if (messageModel.MessageFile != null)
                     {
-                        byte[] filebyte = Convert.FromBase64String(messageModel.MessageFile);
+                        byte[] filebyte = messageModel.MessageFile;
                         PictureBox pictureBox = NewPicture(filebyte);
                         Label createtimelabel = new Label();
                         createtimelabel.Text = "     :" + messageModel.CreateTime;
@@ -211,7 +212,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString());
+                    MessageBox.Show("receive error"+e.ToString());
                 }
 
             }
