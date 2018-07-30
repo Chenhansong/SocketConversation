@@ -31,6 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.send = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.filebutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panel1
@@ -44,7 +45,7 @@
             // 
             // send
             // 
-            this.send.Location = new System.Drawing.Point(849, 704);
+            this.send.Location = new System.Drawing.Point(690, 704);
             this.send.Name = "send";
             this.send.Size = new System.Drawing.Size(75, 23);
             this.send.TabIndex = 1;
@@ -54,18 +55,30 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(513, 687);
+            this.textBox1.Location = new System.Drawing.Point(324, 687);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(324, 40);
             this.textBox1.TabIndex = 2;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
+            // filebutton
+            // 
+            this.filebutton.Location = new System.Drawing.Point(817, 704);
+            this.filebutton.Name = "filebutton";
+            this.filebutton.Size = new System.Drawing.Size(75, 23);
+            this.filebutton.TabIndex = 3;
+            this.filebutton.Text = "File";
+            this.filebutton.UseVisualStyleBackColor = true;
+            this.filebutton.Click += new System.EventHandler(this.filebutton_Click);
+            this.filebutton.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.filebutton_ControlAdded);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(936, 739);
+            this.Controls.Add(this.filebutton);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.send);
             this.Controls.Add(this.panel1);
@@ -82,6 +95,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button send;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button filebutton;
     }
 }
 

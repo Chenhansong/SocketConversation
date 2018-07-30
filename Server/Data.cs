@@ -24,7 +24,7 @@ namespace Server
                 try
                 {
                     conn.Open();
-                    string insert = string.Format("insert MessageTable(Message,UserId,CreateTime) values('{0}','{1}','{2}')", message.Message, message.UserId, message.CreateTime);
+                    string insert = string.Format("insert MessagesTable(MessageText,UserId,CreateTime,MessageFile,Guid) values('{0}','{1}','{2}','{3}','{4}')", message.MessageText, message.UserId, message.CreateTime,message.MessageFile,message.Guid);
                     SqlCommand command = new SqlCommand(insert,conn);
 
                     int result = command.ExecuteNonQuery();
@@ -50,7 +50,7 @@ namespace Server
                 try
                 {
                     conn.Open();
-                    string insert = "delete MessageTable where id=" + id;
+                    string insert = "delete MessagesTable where id=" + id;
                     SqlCommand command = new SqlCommand(insert, conn);
 
                     int result = command.ExecuteNonQuery();
@@ -76,7 +76,7 @@ namespace Server
                 try
                 {
                     conn.Open();
-                    string select = "select * from MessageTable";
+                    string select = "select * from MessagesTable";
                     SqlCommand command = new SqlCommand(select, conn);
 
                     SqlDataReader sqlDataReader = command.ExecuteReader();                 
@@ -84,10 +84,12 @@ namespace Server
                     {
                         MessageModel model = new MessageModel();
 
-                        model.Message = sqlDataReader["Message"].ToString();
+                        model.MessageText = sqlDataReader["MessageText"].ToString();
                         model.UserId = sqlDataReader["UserId"].ToString();
                         model.Id = sqlDataReader["Id"].ToString();
                         model.CreateTime = DateTime.Parse(sqlDataReader["CreateTime"].ToString());
+                        model.MessageFile = sqlDataReader["MessageFile"].ToString();
+                        model.Guid= sqlDataReader["Guid"].ToString();
 
                         modellist.Add(model);
                     }
@@ -113,17 +115,19 @@ namespace Server
                 try
                 {
                     conn.Open();
-                    string select = "select * from MessageTable where UserId="+ userid;
+                    string select = "select * from MessagesTable where UserId="+ userid;
                     SqlCommand command = new SqlCommand(select, conn);
 
                     SqlDataReader sqlDataReader = command.ExecuteReader();
                     MessageModel model = new MessageModel();
                     while (sqlDataReader.Read())
                     {
-                        model.Message = sqlDataReader["Message"].ToString();
+                        model.MessageText = sqlDataReader["MessageText"].ToString();
                         model.UserId = sqlDataReader["UserId"].ToString();
                         model.Id = sqlDataReader["Id"].ToString();
                         model.CreateTime = DateTime.Parse(sqlDataReader["CreateTime"].ToString());
+                        model.Guid = sqlDataReader["Guid"].ToString();
+                        model.MessageFile = sqlDataReader["MessageFile"].ToString();
 
                         modellist.Add(model);
                     }
